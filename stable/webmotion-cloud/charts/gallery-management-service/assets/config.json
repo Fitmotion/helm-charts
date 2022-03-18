@@ -1,0 +1,29 @@
+{
+  "version": "{{.Values.global.version}}",
+  "environment": "{{.Values.global.environment}}",
+  "authentication": {
+    "privateKeyPath": "/tmp/webmotion/keys/key.pem",
+    "publicKeyPath": "/tmp/webmotion/keys/pub.pem"
+  },
+  "db": {
+    "storageConfig": {
+      "user": "{{.Values.global.database.user}}",
+      "password": "{{.Values.global.database.password}}",
+      "host": "{{.Values.global.database.server}}",
+      "database": "{{.Values.global.database.database}}",
+      "port": "{{.Values.global.database.port}}"
+    }
+  },
+  "systemUser": {
+    "username": "{{.Values.global.system_user.username}}",
+    "password": "{{.Values.global.system_user.password}}"
+  },
+  "imagesRootPath": "/images",
+  "videosRootPath": "/videos",
+  "filesRootPath": "/files",
+  "shutterstock": {
+    "subscriptionId": "{{.Values.global.shutterstock.subscriptionId}}",
+    "token": "{{.Values.global.shutterstock.token}}",
+    "sandbox": {{.Values.global.shutterstock.sandbox}}
+  }
+}

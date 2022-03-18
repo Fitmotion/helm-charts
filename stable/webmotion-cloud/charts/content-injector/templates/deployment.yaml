@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cis-{{.Values.global.deploymentName}}
+  labels:
+    app: cis-{{.Values.global.deploymentName}}
+spec:
+  {{- if eq .Values.global.environment "prod" }}
+  replicas: 3
+  {{- else }}
+  replicas: 1
+  {{- end }}
+  selector:
+    matchLabels:
+      app: cis-{{.Values.global.deploymentName}}
+  template:
+    metadata:
+      labels:
+        app: cis-{{.Values.global.deploymentName}}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - name: cis-{{.Values.global.deploymentName}}
+        image: "{{.Values.global.containerRegistry.server}}/content-injector:{{.Values.global.version}}"
+        ports:
+        - name: http
+          containerPort: {{.Values.global.services.cis.port}}
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /layouts
+          name: cephfs-volume
+          subPath: layouts
+        - mountPath: /templates
+          name: cephfs-volume
+          subPath: templates
+        - mountPath: /websites
+          name: cephfs-volume
+          subPath: websites
+        - mountPath: /images
+          name: cephfs-volume
+          subPath: images
+        - mountPath: /tmp/webmotion/config
+          name: config-volume
+        - mountPath: /tmp/webmotion/keys
+          name: secret-volume
+        env:
+        - name: CONFIG_PATH
+          value: /tmp/webmotion/config/config.json
+        - name: ENVIRONMENT
+          value: {{.Values.global.environment}}
+        - name: TZ
+          value: Europe/Berlin
+        - name: VERSION
+          value: {{.Values.global.version}}
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: {{.Values.global.services.cis.port}}
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          timeoutSeconds: 30
+        resources:
+        {{- if ne .Values.global.environment "prod" }}
+          requests:
+            memory: "100Mi"
+            cpu: "5m"
+          limits:
+            memory: "2Gi"
+            cpu: "2"
+        {{- else }}
+          requests:
+            memory: "1Gi"
+            cpu: "200m"
+          limits:
+            memory: "4Gi"
+            cpu: "2"
+        {{- end }}
+      volumes:
+      - name: cephfs-volume
+        persistentVolumeClaim:
+          claimName: cephfs-pvc
+      - name: config-volume
+        configMap:
+          name: cis-{{.Values.global.deploymentName}}
+      - name: secret-volume
+        secret:
+          secretName: account

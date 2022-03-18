@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pms-{{.Values.global.deploymentName}}
+  labels:
+    app: pms-{{.Values.global.deploymentName}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pms-{{.Values.global.deploymentName}}
+  template:
+    metadata:
+      labels:
+        app: pms-{{.Values.global.deploymentName}}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - name: pms-{{.Values.global.deploymentName}}
+        image: "{{.Values.global.containerRegistry.server}}/payment-management:{{.Values.global.version}}"
+        ports:
+        - name: http
+          containerPort: {{.Values.global.services.pms.port}}
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /tmp/webmotion/config
+          name: config-volume
+        - mountPath: /tmp/webmotion/keys
+          name: secret-volume
+        env:
+        - name: CONFIG_PATH
+          value: /tmp/webmotion/config/config.json
+        - name: ENVIRONMENT
+          value: {{.Values.global.environment}}
+        - name: TZ
+          value: Europe/Berlin
+        - name: VERSION
+          value: {{.Values.global.version}}
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: {{.Values.global.services.pms.port}}
+          initialDelaySeconds: 3
+          periodSeconds: 30
+        resources:
+        {{- if ne .Values.global.environment "prod" }}
+          requests:
+            memory: "60Mi"
+            cpu: "5m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        {{- else }}
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        {{- end }}
+      volumes:
+      - name: config-volume
+        configMap:
+          name: pms-{{.Values.global.deploymentName}}
+      - name: secret-volume
+        secret:
+          secretName: account

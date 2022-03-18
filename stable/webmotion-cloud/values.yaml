@@ -1,0 +1,77 @@
+# This file contains all configurable values for the whole chart and subcharts.
+# It is intended to be overriden by anoter values-xx.yaml file when instantiating the chart, like so
+# helm template -f values.yaml -f values-dev.yaml .
+
+global:
+  version: "0.0.0"
+  environment: "local"
+
+  deploymentName: "thedeploymentname"
+  subDomain: "app."
+
+  targets:
+    - name: webmotion
+      baseDomain: webmotion.cloud
+      cert:
+        issuer: webmotion-prod
+        secret: webmotion-wildcard
+
+    - name: fitmotion
+      baseDomain: fitmotion.cloud
+      cert:
+        issuer: fitmotion-prod
+        secret: fitmotion-wildcard
+
+    - name: beautymotion
+      baseDomain: beautymotion.cloud
+      cert:
+        issuer: beautymotion-prod
+        secret: beautymotion-wildcard
+
+  database:
+    provider: postgres
+    user: ""
+    password: ""
+    server: "db.database.windows.net"
+    database: "db"
+    port: 5432
+    schema: "" # is not used at the moment, but rather defaulted by the user-schema
+
+  system_user:
+    username: "system_user"
+    password: ""
+
+  stripe:
+    secret_key: ""
+    wh_secret: ""
+
+  shutterstock:
+    token: ""
+    sandbox: true
+    subscriptionId: "62031691"
+
+  containerRegistry:
+    server: fitmotion.azurecr.io
+
+  facebook:
+    appId: ""
+    appSecret: ""
+    redirectUrlPath: "/redirect/facebook-login-redirect"
+
+  services:
+    cis:
+      port: 3001
+    wcms:
+      port: 3002
+    lms:
+      port: 3003
+    idps:
+      port: 3004
+    ams:
+      port: 3005
+    gms:
+      port: 3007
+    pms:
+      port: 3008
+    mms:
+      port: 3009

@@ -1,0 +1,28 @@
+{
+  "version": "{{.Values.global.version}}",
+  "environment": "{{.Values.global.environment}}",
+  "authentication": {
+    "privateKeyPath": "/tmp/webmotion/keys/key.pem",
+    "publicKeyPath": "/tmp/webmotion/keys/pub.pem"
+  },
+  "db": {
+    "storageConfig": {
+      "user": "{{.Values.global.database.user}}",
+      "password": "{{.Values.global.database.password}}",
+      "host": "{{.Values.global.database.server}}",
+      "database": "{{.Values.global.database.database}}",
+      "port": "{{.Values.global.database.port}}"
+    }
+  },
+  "contentInjector": {
+    "url": "http://cis-{{.Values.global.deploymentName}}:3001"
+  },
+  "identityProvider": {
+    "url": "http://idps-{{.Values.global.deploymentName}}:3004"
+  },
+  "galleryManager": {
+    "url": "http://gms-{{.Values.global.deploymentName}}:3007"
+  },
+  "layoutsRootPath": "/layouts",
+  "templatesRootPath": "/templates"
+}

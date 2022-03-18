@@ -1,0 +1,12 @@
+# This file overrides settings from the 'root' values.yaml just beside this file, for the qa environment
+# It is intended to be used in the following way:
+# helm template -f values.yaml -f <thisfile> mychart .
+# so that it may override the settings from values.yaml (keep the order of the -f args for this to work)
+
+global:
+  environment: "qa"
+
+  database:
+    server: "webmotion-dev-db-postgresql.dev-database"
+    port: 5432
+    database: "devfitmotion"

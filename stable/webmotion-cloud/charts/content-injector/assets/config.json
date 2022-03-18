@@ -1,0 +1,37 @@
+{
+  "version": "{{.Values.global.version}}",
+  "environment": "{{.Values.global.environment}}",
+  "authentication": {
+    "privateKeyPath": "/tmp/webmotion/keys/key.pem",
+    "publicKeyPath": "/tmp/webmotion/keys/pub.pem"
+  },
+  "nginxConfigsRootPath": "/nginx-config",
+  "layoutsRootPath": "/layouts",
+  "websitesRootPath": "/websites",
+  "templatesRootPath": "/templates",
+  "imagesRootPath": "/images",
+  "k8s": {
+    {{- if eq .Values.global.environment "prod" }}
+    "namespace": "prod-fitmotion",
+    {{- else }}
+    "namespace": "dev-fitmotion",
+    {{- end }}
+
+    "configPath": "/tmp/webmotion/keys/kube_config",
+
+    {{- if eq .Values.global.environment "prod" }}
+    "internalDomainSuffix": "on.webmotion.cloud",
+    {{- else }}
+    "internalDomainSuffix": "on.dev.webmotion.cloud",
+    {{- end }}
+    "internalWildcardSecret": "webmotion-wildcard"
+  },
+  "fileShare": {
+    "claimName": "cephfs-pvc"
+  },
+  {{- if eq .Values.global.environment "prod" }}
+  "contactsJsUrl": "https://app.webmotion.cloud/lms/exposed/contact/create"
+  {{- else }}
+  "contactsJsUrl": "https://qa.webmotion.cloud/lms/exposed/contact/create"
+  {{- end }}
+}

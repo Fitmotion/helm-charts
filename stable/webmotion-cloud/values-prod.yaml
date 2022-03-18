@@ -1,0 +1,15 @@
+# This file overrides settings from the 'root' values.yaml just beside this file, for the prod environment
+# It is intended to be used in the following way:
+# helm template -f values.yaml -f <thisfile> mychart .
+# so that it may override the settings from values.yaml (keep the order of the -f args for this to work)
+
+global:
+  environment: "prod"
+
+  database:
+    server: "webmotion-prod-db-postgresql.prod-database"
+    port: 5432
+    database: "prodfitmotion"
+
+  shutterstock:
+    sandbox: false

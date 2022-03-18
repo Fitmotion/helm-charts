@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gms-{{.Values.global.deploymentName}}
+  labels:
+    app: gms-{{.Values.global.deploymentName}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gms-{{.Values.global.deploymentName}}
+  template:
+    metadata:
+      labels:
+        app: gms-{{.Values.global.deploymentName}}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - name: gms-{{.Values.global.deploymentName}}
+        image: "{{.Values.global.containerRegistry.server}}/gallery-management:{{.Values.global.version}}"
+        ports:
+        - name: http
+          containerPort: {{.Values.global.services.gms.port}}
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /images
+          name: cephfs-volume
+          subPath: images
+        - mountPath: /videos
+          name: cephfs-volume
+          subPath: videos
+        - mountPath: /files
+          name: cephfs-volume
+          subPath: files
+        - mountPath: /tmp/webmotion/config
+          name: config-volume
+        - mountPath: /tmp/webmotion/keys
+          name: secret-volume
+        env:
+        - name: CONFIG_PATH
+          value: /tmp/webmotion/config/config.json
+        - name: ENVIRONMENT
+          value: {{.Values.global.environment}}
+        - name: TZ
+          value: Europe/Berlin
+        - name: VERSION
+          value: {{.Values.global.version}}
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: {{.Values.global.services.gms.port}}
+          initialDelaySeconds: 3
+          periodSeconds: 30
+        resources:
+        {{- if ne .Values.global.environment "prod" }}
+          requests:
+            memory: "100Mi"
+            cpu: "5m"
+          limits:
+            memory: "2Gi"
+            cpu: "2"
+        {{- else }}
+          requests:
+            memory: "512Mi"
+            cpu: "100m"
+          limits:
+            memory: "2Gi"
+            cpu: "1"
+        {{- end }}
+      volumes:
+      - name: cephfs-volume
+        persistentVolumeClaim:
+          claimName: cephfs-pvc
+      - name: config-volume
+        configMap:
+          name: gms-{{.Values.global.deploymentName}}
+      - name: secret-volume
+        secret:
+          secretName: account
