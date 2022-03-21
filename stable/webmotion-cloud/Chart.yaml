@@ -3,3 +3,14 @@ appVersion: "1.0"
 description: A Helm chart for the webmotion landscape
 name: webmotion
 version: 0.1.0
+dependencies:
+  - name: gms
+  - name: idps
+  - name: ingress
+  - name: lms
+  - name: client
+  - name: cis
+  - name: mms
+  - name: pms
+  - name: wcms
+  - name: ams
