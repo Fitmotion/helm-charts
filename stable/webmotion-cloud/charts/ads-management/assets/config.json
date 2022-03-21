@@ -1,0 +1,51 @@
+{
+  "version": "{{.Values.global.version}}",
+  "environment": "{{.Values.global.environment}}",
+  "authentication": {
+    "privateKeyPath": "/tmp/webmotion/keys/key.pem",
+    "publicKeyPath": "/tmp/webmotion/keys/pub.pem"
+  },
+  "subDomain": "{{.Values.global.subDomain}}",
+  "db": {
+    "storageConfig": {
+      "user": "{{.Values.global.database.user}}",
+      "password": "{{.Values.global.database.password}}",
+      "host": "{{.Values.global.database.server}}",
+      "database": "{{.Values.global.database.database}}",
+      "port": "{{.Values.global.database.port}}"
+    }
+  },
+  "layoutsRootPath": "/layouts",
+  "websitesRootPath": "/websites",
+  "templatesRootPath": "/templates",
+  "identityProvider": {
+    "url": "http://idps-{{.Values.global.deploymentName}}:3004"
+  },
+  "galleryManager": {
+    "url": "http://gms-{{.Values.global.deploymentName}}:3007"
+  },
+  "marketingProvider": {
+    "url": "http://mms-{{.Values.global.deploymentName}}:3009"
+  },
+  "paymentManager": {
+    "url": "http://pms-{{.Values.global.deploymentName}}:3008"
+  },
+  "basePath": {
+    "url": "https://{{.Values.global.host}}"
+  },
+  "systemUser": {
+    "username": "{{.Values.global.system_user.username}}",
+    "password": "{{.Values.global.system_user.password}}",
+    "url": "https://app.webmotion.cloud"
+  },
+  "assetServer": {
+    "basePath": "https://app.webmotion.cloud"
+  },
+  "facebook": {
+    "graphURL": "https://graph.facebook.com/",
+    "apiVersion": "v11.0/",
+    "redirectUrlPath": "{{.Values.global.facebook.redirectUrlPath}}",
+    "appId": "{{.Values.global.facebook.appId}}",
+    "appSecret": "{{.Values.global.facebook.appSecret}}"
+  }
+}

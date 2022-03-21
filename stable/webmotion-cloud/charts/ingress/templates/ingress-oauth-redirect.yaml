@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/permanent-redirect: https://{{ $.Values.global.host }}/#$2?$args
+  name: oauth-redirect-{{ $.Values.global.target }}-{{ $.Values.global.deploymentName }}
+spec:
+  rules:
+  - host: {{ $.Values.global.host }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: client-{{ $.Values.global.deploymentName }}
+            port: 
+              number: 80
+        pathType: Prefix
+        path: /redirect(/|$)(.*)
+  tls:
+  - hosts:
+    - {{ $.Values.global.host }}
+    secretName: {{ $.Values.global.target }}-wildcard

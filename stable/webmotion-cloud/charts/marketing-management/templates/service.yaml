@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mms-{{.Values.global.deploymentName}}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{.Values.global.services.mms.port}}
+  selector:
+    app: mms-{{.Values.global.deploymentName}}

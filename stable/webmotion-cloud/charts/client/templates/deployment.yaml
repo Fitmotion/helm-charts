@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-{{.Values.global.deploymentName}}
+  labels:
+    app: client-{{.Values.global.deploymentName}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-{{.Values.global.deploymentName}}
+  template:
+    metadata:
+      labels:
+        app: client-{{.Values.global.deploymentName}}
+    spec:
+      containers:
+      - name: client-{{.Values.global.deploymentName}}
+        image: "{{.Values.global.containerRegistry.server}}/client:{{.Values.global.version}}"
+        ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP
+        env:
+        - name: TZ
+          value: Europe/Berlin
+        - name: VERSION
+          value: {{.Values.global.version}}
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /index.html
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        resources:
+        {{- if ne .Values.global.environment "prod" }}
+          requests:
+            memory: "20Mi"
+            cpu: "5m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        {{- else }}
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        {{- end }}

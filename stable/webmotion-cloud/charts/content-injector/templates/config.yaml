@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cis-{{.Values.global.deploymentName}}
+data:
+  config.json: |
+    {{- tpl (.Files.Get "assets/config.json") . | nindent 3 }}

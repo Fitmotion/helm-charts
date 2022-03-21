@@ -1,0 +1,31 @@
+{
+  "version": "{{.Values.global.version}}",
+  "environment": "{{.Values.global.environment}}",
+  "authentication": {
+    "privateKeyPath": "/tmp/webmotion/keys/key.pem",
+    "publicKeyPath": "/tmp/webmotion/keys/pub.pem"
+  },
+  "db": {
+    "storageConfig": {
+      "user": "{{.Values.global.database.user}}",
+      "password": "{{.Values.global.database.password}}",
+      "host": "{{.Values.global.database.server}}",
+      "database": "{{.Values.global.database.database}}",
+      "port": "{{.Values.global.database.port}}"
+    }
+  },
+  "baseDomain": "{{.Values.global.host}}",
+  "emailSecrets": {
+    "email": "no-reply@fitmotion.cloud",
+    "password": "vVqE?(9jxfZ/7z="
+  },
+  "websiteManager": {
+    "url": "http://wcms-{{.Values.global.deploymentName}}:3002"
+  },
+  "galleryManager": {
+    "url": "http://gms-{{.Values.global.deploymentName}}:3007"
+  },
+  "paymentManager": {
+    "url": "http://pms-{{.Values.global.deploymentName}}:3008"
+  }
+}
