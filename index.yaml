@@ -1,0 +1,44 @@
+apiVersion: v1
+entries:
+  webmotion:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2022-03-21T09:41:36.262913099Z"
+    dependencies:
+    - name: gallery-management
+      repository: ""
+      version: 0.1.0
+    - name: identity-provider
+      repository: ""
+      version: 0.1.0
+    - name: ingress
+      repository: ""
+      version: 0.1.0
+    - name: lead-management
+      repository: ""
+      version: 0.1.0
+    - name: client
+      repository: ""
+      version: 0.1.0
+    - name: content-injector
+      repository: ""
+      version: 0.1.0
+    - name: marketing-management
+      repository: ""
+      version: 0.1.0
+    - name: payment-management
+      repository: ""
+      version: 0.1.0
+    - name: website-content-management
+      repository: ""
+      version: 0.1.0
+    - name: ads-management
+      repository: ""
+      version: 0.1.0
+    description: A Helm chart for the webmotion landscape
+    digest: 81a6929b9296e4eed67c43fb76dc59f891a6b1a6f55d1ad6726c53c9b4726373
+    name: webmotion
+    urls:
+    - https://Fitmotion.github.io/helm-charts/webmotion-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-03-21T09:41:36.261507591Z"
