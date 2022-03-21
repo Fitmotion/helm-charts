@@ -4,23 +4,13 @@ description: A Helm chart for the webmotion landscape
 name: webmotion
 version: 0.1.0
 dependencies:
-  - name: gms
-    repository: file://./charts/gallery-management
-  - name: idps
-    repository: file://./charts/identity-provider
+  - name: gallery-management
+  - name: identity-provider
   - name: ingress
-    repository: file://./charts/ingress
-  - name: lms
-    repository: file://./charts/lead-management
+  - name: lead-management
   - name: client
-    repository: file://./charts/client
-  - name: cis
-    repository: file://./charts/content-injector
-  - name: mms
-    repository: file://./charts/marketing-management
-  - name: pms
-    repository: file://./charts/payment-management
-  - name: wcms
-    repository: file://./charts/website-content-management
-  - name: ams
-    repository: file://./charts/ads-management
+  - name: content-injector
+  - name: marketing-management
+  - name: payment-management
+  - name: website-content-management
+  - name: ads-management
