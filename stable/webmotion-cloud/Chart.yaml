@@ -5,12 +5,22 @@ name: webmotion
 version: 0.1.0
 dependencies:
   - name: gallery-management
+    version: 0.1.0
   - name: identity-provider
+    version: 0.1.0
   - name: ingress
+    version: 0.1.0
   - name: lead-management
+    version: 0.1.0
   - name: client
+    version: 0.1.0
   - name: content-injector
+    version: 0.1.0
   - name: marketing-management
+    version: 0.1.0
   - name: payment-management
+    version: 0.1.0
   - name: website-content-management
+    version: 0.1.0
   - name: ads-management
+    version: 0.1.0
