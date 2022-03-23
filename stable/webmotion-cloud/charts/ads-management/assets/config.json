@@ -5,7 +5,6 @@
     "privateKeyPath": "/tmp/webmotion/keys/key.pem",
     "publicKeyPath": "/tmp/webmotion/keys/pub.pem"
   },
-  "subDomain": "{{.Values.global.subDomain}}",
   "db": {
     "storageConfig": {
       "user": "{{.Values.global.database.user}}",
@@ -44,7 +43,7 @@
   "facebook": {
     "graphURL": "https://graph.facebook.com/",
     "apiVersion": "v11.0/",
-    "redirectUrlPath": "{{.Values.global.facebook.redirectUrlPath}}",
+    "redirectURL": "https://{{.Values.global.host}}/{{.Values.global.facebook.redirectUrlPath}}",
     "appId": "{{.Values.global.facebook.appId}}",
     "appSecret": "{{.Values.global.facebook.appSecret}}"
   }

@@ -7,14 +7,13 @@ global:
   environment: "local"
 
   deploymentName: "thedeploymentname"
-  subDomain: "app."
+  target: webmotion
+  host: app.webmotion.cloud
+  rootDomain: webmotion.cloud
 
-  targets:
-    - name: webmotion
-      baseDomain: webmotion.cloud
-      cert:
-        issuer: webmotion-prod
-        secret: webmotion-wildcard
+  cert:
+    issuer: webmotion-prod
+    secret: webmotion-wildcard
 
   database:
     provider: postgres
@@ -44,7 +43,7 @@ global:
   facebook:
     appId: ""
     appSecret: ""
-    redirectUrlPath: "/redirect/facebook-login-redirect"
+    redirectUrlPath: "redirect/facebook-login-redirect"
 
   services:
     cis:

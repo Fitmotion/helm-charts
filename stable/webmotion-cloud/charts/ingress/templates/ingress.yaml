@@ -1,8 +1,7 @@
-{{- range $.Values.global.targets }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: client-{{ $.Values.global.deploymentName }}-{{ .name }}
+  name: client-{{ $.Values.global.deploymentName }}-{{ $.Values.global.target }}
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
@@ -10,14 +9,14 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: "{{ .cert.issuer }}"
+    cert-manager.io/cluster-issuer: "{{ $.Values.global.cert.issuer }}"
 spec:
   tls:
   - hosts:
-    - {{ $.Values.global.subDomain }}{{ .baseDomain }}
-    secretName: {{ .cert.secret }}
+    - {{ $.Values.global.host }}
+    secretName: {{ $.Values.global.cert.secret }}
   rules:
-  - host: {{ $.Values.global.subDomain }}{{ .baseDomain }}
+  - host: {{ $.Values.global.host }}
     http:
       paths:
       - path: /
@@ -31,7 +30,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name:  http-api-main-{{$.Values.global.deploymentName}}-{{ .name }}
+  name:  http-api-main-{{$.Values.global.deploymentName}}-{{ $.Values.global.target }}
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
@@ -39,17 +38,17 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: "{{ .cert.issuer }}"
+    cert-manager.io/cluster-issuer: "{{ $.Values.global.cert.issuer }}"
 spec:
   tls:
   - hosts:
-    - {{ $.Values.global.subDomain }}{{ .baseDomain }}
+    - {{ $.Values.global.host }}
     {{- if eq $.Values.global.environment "prod" }}
-    - {{ .baseDomain }}
+    - {{ $.Values.global.rootDomain }}
     {{- end }}
-    secretName: {{ .cert.secret }}
+    secretName: {{ $.Values.global.cert.secret }}
   rules:
-  - host: {{ $.Values.global.subDomain }}{{ .baseDomain }}
+  - host: {{ $.Values.global.host }}
     http:
       paths:
       - path: /idps
@@ -109,7 +108,7 @@ spec:
             port:
               number: 80
   {{- if eq $.Values.global.environment "prod" }}
-  - host: {{ .baseDomain }}
+  - host: {{ $.Values.global.rootDomain }}
     http:
       paths:
       - path: /idps
