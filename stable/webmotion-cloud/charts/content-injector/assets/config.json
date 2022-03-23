@@ -31,7 +31,9 @@
   },
   {{- if eq .Values.global.environment "prod" }}
   "contactsJsUrl": "https://app.webmotion.cloud/lms/exposed/contact/create"
-  {{- else }}
+  {{- else if eq .Values.global.environment "qa" }}
   "contactsJsUrl": "https://qa.webmotion.cloud/lms/exposed/contact/create"
+  {{- else }}
+  "contactsJsUrl": "https://{{.Values.global.deploymentName}}.dev.webmotion.cloud/lms/exposed/contact/create"
   {{- end }}
 }
