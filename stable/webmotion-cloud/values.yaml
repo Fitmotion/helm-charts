@@ -16,18 +16,6 @@ global:
         issuer: webmotion-prod
         secret: webmotion-wildcard
 
-    - name: fitmotion
-      baseDomain: fitmotion.cloud
-      cert:
-        issuer: fitmotion-prod
-        secret: fitmotion-wildcard
-
-    - name: beautymotion
-      baseDomain: beautymotion.cloud
-      cert:
-        issuer: beautymotion-prod
-        secret: beautymotion-wildcard
-
   database:
     provider: postgres
     user: ""
