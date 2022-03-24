@@ -21,10 +21,11 @@
 
     {{- if eq .Values.global.environment "prod" }}
     "internalDomainSuffix": "on.webmotion.cloud",
+    "internalWildcardSecret": "webmotion-on-wildcard"
     {{- else }}
     "internalDomainSuffix": "on.dev.webmotion.cloud",
+    "internalWildcardSecret": "webmotion-on-dev-wildcard"
     {{- end }}
-    "internalWildcardSecret": "webmotion-wildcard"
   },
   "fileShare": {
     "claimName": "cephfs-pvc"
