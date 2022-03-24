@@ -1,15 +1,18 @@
-# This file overrides settings from the 'root' values.yaml just beside this file, for the prod environment
+# This file overrides settings from the 'root' values.yaml just beside this file, for the staging environment
 # It is intended to be used in the following way:
 # helm template -f values.yaml -f <thisfile> mychart .
 # so that it may override the settings from values.yaml (keep the order of the -f args for this to work)
 
 global:
-  environment: "staging"
+  environment: staging
+  deploymentName: staging
+  host: staging.webmotion.cloud
+  rootDomain: webmotion.cloud
 
   database:
-    server: "webmotion-dev-db-postgresql.dev-database"
+    server: webmotion-dev-db-postgresql.dev-database
     port: 5432
-    database: "prodfitmotion"
+    database: prodfitmotion
 
   shutterstock:
-    sandbox: false
+    sandbox: true

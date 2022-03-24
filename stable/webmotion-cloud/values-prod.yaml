@@ -4,12 +4,15 @@
 # so that it may override the settings from values.yaml (keep the order of the -f args for this to work)
 
 global:
-  environment: "prod"
+  environment: prod
+  deploymentName: prod
+  host: app.webmotion.cloud
+  rootDomain: webmotion.cloud
 
   database:
-    server: "webmotion-prod-db-postgresql.prod-database"
+    server: webmotion-prod-db-postgresql.prod-database
     port: 5432
-    database: "prodfitmotion"
+    database: prodfitmotion
 
   shutterstock:
     sandbox: false

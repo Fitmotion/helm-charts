@@ -4,9 +4,15 @@
 # so that it may override the settings from values.yaml (keep the order of the -f args for this to work)
 
 global:
-  environment: "qa"
+  environment: qa
+  deploymentName: qa
+  host: qa.webmotion.cloud
+  rootDomain: webmotion.cloud
 
   database:
-    server: "webmotion-dev-db-postgresql.dev-database"
+    server: webmotion-dev-db-postgresql.dev-database
     port: 5432
-    database: "devfitmotion"
+    database: devfitmotion
+
+  shutterstock:
+    sandbox: true
