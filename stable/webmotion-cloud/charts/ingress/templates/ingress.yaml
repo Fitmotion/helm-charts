@@ -14,7 +14,7 @@ spec:
   tls:
   - hosts:
     - {{ $.Values.global.host }}
-    secretName: client-{{ $.Values.global.deploymentName }}-{{ $.Values.global.target }}-tls
+    secretName: {{$.Values.global.deploymentName}}-{{ $.Values.global.target }}-tls
   rules:
   - host: {{ $.Values.global.host }}
     http:
@@ -43,7 +43,7 @@ spec:
   tls:
   - hosts:
     - {{ $.Values.global.host }}
-    secretName: http-api-main-{{$.Values.global.deploymentName}}-{{ $.Values.global.target }}-tls
+    secretName: {{$.Values.global.deploymentName}}-{{ $.Values.global.target }}-tls
   rules:
   - host: {{ $.Values.global.host }}
     http:
