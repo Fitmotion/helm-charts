@@ -13,7 +13,6 @@ global:
 
   cert:
     issuer: letsencrypt-prod
-    secret: webmotion-wildcard
 
   database:
     provider: postgres

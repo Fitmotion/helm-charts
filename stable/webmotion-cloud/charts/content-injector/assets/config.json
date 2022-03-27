@@ -24,7 +24,7 @@
     "internalWildcardSecret": "webmotion-on-wildcard"
     {{- else }}
     "internalDomainSuffix": "on.dev.webmotion.cloud",
-    "internalWildcardSecret": "webmotion-on-dev-wildcard"
+    "internalWildcardSecret": "webmotion-dev-wildcard"
     {{- end }}
   },
   "fileShare": {
