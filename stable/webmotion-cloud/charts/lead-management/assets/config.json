@@ -15,8 +15,8 @@
     }
   },
   "emailSecrets": {
-    "email": "no-reply@fitmotion.cloud",
-    "password": "vVqE?(9jxfZ/7z="
+    "email": "{{.Values.global.emailSecrets.email}}",
+    "password": "{{.Values.global.emailSecrets.password}}"
   },
   "googleCalendar": {
     "clientId": "788802996428-crqo7r0r54punn3ousgqop6ge9c23c9e",

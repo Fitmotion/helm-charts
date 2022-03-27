@@ -44,6 +44,10 @@ global:
     appSecret: ""
     redirectUrlPath: "redirect/facebook-login-redirect"
 
+  emailSecrets:
+    email: support@webmotion.cloud
+    password: ""
+
   services:
     cis:
       port: 3001
