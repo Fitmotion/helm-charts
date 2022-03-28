@@ -3,7 +3,7 @@ entries:
   webmotion:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-03-27T21:01:51.177079018Z"
+    created: "2022-03-28T08:18:58.134556039Z"
     dependencies:
     - name: gallery-management
       repository: ""
@@ -36,9 +36,9 @@ entries:
       repository: ""
       version: 0.1.0
     description: A Helm chart for the webmotion landscape
-    digest: 362aa1e2bf5db553bf9fedffea63833c207243f1015ac41315911fc09d51d0a8
+    digest: 3b29379e54a75d22ffc88e01d2b695f147940ac4a23a4aaff89c69e900eec17e
     name: webmotion
     urls:
     - https://Fitmotion.github.io/helm-charts/webmotion-0.1.0.tgz
     version: 0.1.0
-generated: "2022-03-27T21:01:51.174350002Z"
+generated: "2022-03-28T08:18:58.131254058Z"
