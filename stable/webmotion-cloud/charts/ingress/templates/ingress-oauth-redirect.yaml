@@ -21,4 +21,4 @@ spec:
   tls:
   - hosts:
     - {{ $.Values.global.host }}
-    secretName: {{ $.Values.global.target }}-app
+    secretName: {{$.Values.global.deploymentName}}-{{ $.Values.global.target }}-tls
