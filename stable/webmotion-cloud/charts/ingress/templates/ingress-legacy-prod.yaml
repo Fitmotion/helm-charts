@@ -1,36 +1,8 @@
+{{- if eq .Values.global.environment "prod" }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: client-{{ $.Values.global.deploymentName }}-{{ $.Values.global.target }}
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: "{{ $.Values.global.cert.issuer }}"
-spec:
-  tls:
-  - hosts:
-    - {{ $.Values.global.host }}
-    secretName: {{$.Values.global.deploymentName}}-{{ $.Values.global.target }}-tls
-  rules:
-  - host: {{ $.Values.global.host }}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: client-{{ $.Values.global.deploymentName }}
-            port: 
-              number: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name:  http-api-main-{{$.Values.global.deploymentName}}-{{ $.Values.global.target }}
+  name:  http-api-main-{{$.Values.global.deploymentName}}-fitmotion
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
@@ -42,10 +14,11 @@ metadata:
 spec:
   tls:
   - hosts:
-    - {{ $.Values.global.host }}
-    secretName: {{$.Values.global.deploymentName}}-{{ $.Values.global.target }}-tls
+    - fitmotion.cloud
+    - app.fitmotion.cloud
+    secretName: {{$.Values.global.deploymentName}}-fitmotion-tls
   rules:
-  - host: {{ $.Values.global.host }}
+  - host: fitmotion.cloud
     http:
       paths:
       - path: /idps
@@ -111,3 +84,70 @@ spec:
             name: global-file-server
             port:
               number: 80
+  - host: app.fitmotion.cloud
+    http:
+      paths:
+      - path: /idps
+        pathType: Prefix
+        backend:
+          service:
+            name: idps-{{$.Values.global.deploymentName }}
+            port:
+              number: {{$.Values.global.services.idps.port}}
+      - path: /wcms
+        pathType: Prefix
+        backend:
+          service:
+            name: wcms-{{$.Values.global.deploymentName}}
+            port:
+              number: {{$.Values.global.services.wcms.port}}
+      - path: /lms
+        pathType: Prefix
+        backend:
+          service:
+            name: lms-{{$.Values.global.deploymentName}}
+            port:
+              number: {{$.Values.global.services.lms.port}}
+      - path: /gms
+        pathType: Prefix
+        backend:
+          service:
+            name: gms-{{$.Values.global.deploymentName}}
+            port:
+              number: {{$.Values.global.services.gms.port}}
+      - path: /pms
+        pathType: Prefix
+        backend:
+          service:
+            name: pms-{{$.Values.global.deploymentName}}
+            port:
+              number: {{$.Values.global.services.pms.port}}
+      - path: /ams
+        pathType: Prefix
+        backend:
+          service:
+            name: ams-{{$.Values.global.deploymentName}}
+            port:
+              number: {{$.Values.global.services.ams.port}}
+      - path: /mms
+        pathType: Prefix
+        backend:
+          service:
+            name: mms-{{$.Values.global.deploymentName}}
+            port:
+              number: {{$.Values.global.services.mms.port}}
+      - path: /content
+        pathType: Prefix
+        backend:
+          service:
+            name: global-file-server
+            port:
+              number: 80
+      - path: /.well-known
+        pathType: Prefix
+        backend:
+          service:
+            name: global-file-server
+            port:
+              number: 80
+{{- end }}
