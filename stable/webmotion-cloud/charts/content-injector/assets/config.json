@@ -31,6 +31,14 @@
     "claimName": "cephfs-pvc"
   },
   {{- if eq .Values.global.environment "prod" }}
+  "baseAdress": "https://app.webmotion.cloud",
+  {{- else if eq .Values.global.environment "qa" }}
+  "baseAdress": "https://qa.webmotion.cloud",
+  {{- else }}
+  "baseAdress": "https://{{.Values.global.deploymentName}}.dev.webmotion.cloud",
+  {{- end }}
+
+  {{- if eq .Values.global.environment "prod" }}
   "contactsJsUrl": "https://app.webmotion.cloud/lms/exposed/contact/create"
   {{- else if eq .Values.global.environment "qa" }}
   "contactsJsUrl": "https://qa.webmotion.cloud/lms/exposed/contact/create"
