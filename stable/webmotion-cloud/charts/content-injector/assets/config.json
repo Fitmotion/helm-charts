@@ -31,11 +31,11 @@
     "claimName": "cephfs-pvc"
   },
   {{- if eq .Values.global.environment "prod" }}
-  "baseAdress": "https://app.webmotion.cloud",
+  "fileServerBaseAdress": "https://global-file-server",
   {{- else if eq .Values.global.environment "qa" }}
-  "baseAdress": "https://qa.webmotion.cloud",
+  "fileServerBaseAdress": "https://qa.webmotion.cloud",
   {{- else }}
-  "baseAdress": "https://{{.Values.global.deploymentName}}.dev.webmotion.cloud",
+  "fileServerBaseAdress": "https://{{.Values.global.deploymentName}}.dev.webmotion.cloud",
   {{- end }}
 
   {{- if eq .Values.global.environment "prod" }}
