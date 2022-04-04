@@ -31,7 +31,7 @@
     "claimName": "cephfs-pvc"
   },
   {{- if eq .Values.global.environment "prod" }}
-  "fileServerBaseAdress": "https://global-file-server",
+  "fileServerBaseAdress": "http://global-file-server",
   {{- else if eq .Values.global.environment "qa" }}
   "fileServerBaseAdress": "https://qa.webmotion.cloud",
   {{- else }}
