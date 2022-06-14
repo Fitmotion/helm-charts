@@ -27,5 +27,9 @@
   },
   "paymentManager": {
     "url": "http://pms-{{.Values.global.deploymentName}}:3008"
+  },
+  "activeCampaign": {
+    "baseUrl": "https://webmotion47540.api-us1.com/api/3",
+    "apiKey": "{{.Values.global.activeCampaignSecrets.apiKey}}"
   }
 }

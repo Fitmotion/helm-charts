@@ -48,6 +48,9 @@ global:
     email: support@webmotion.cloud
     password: ""
 
+  activeCampaignSecrets:
+    apiKey: ""
+
   services:
     cis:
       port: 3001
