@@ -53,20 +53,20 @@ spec:
           initialDelaySeconds: 3
           periodSeconds: 30
         resources:
-        {{- if ne .Values.global.environment "prod" }}
+        {{- if eq .Values.global.environment "prod" }}
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "2Gi"
+            cpu: "1"
+        {{- else }}
           requests:
             memory: "60Mi"
             cpu: "5m"
           limits:
-            memory: "2Gi"
-            cpu: "2"
-        {{- else }}
-          requests:
-            memory: "128Mi"
-            cpu: "100m"
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
+            memory: "1Gi"
+            cpu: "1"
         {{- end }}
       volumes:
       - name: cephfs-volume
