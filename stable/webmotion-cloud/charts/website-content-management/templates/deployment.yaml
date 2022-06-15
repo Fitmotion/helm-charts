@@ -5,7 +5,11 @@ metadata:
   labels:
     app: wcms-{{.Values.global.deploymentName}}
 spec:
+  {{- if eq .Values.global.environment "prod" }}
+  replicas: 2
+  {{- else }}
   replicas: 1
+  {{- end }}
   selector:
     matchLabels:
       app: wcms-{{.Values.global.deploymentName}}
@@ -54,12 +58,12 @@ spec:
           periodSeconds: 30
         resources:
         {{- if eq .Values.global.environment "prod" }}
-          requests:
-            memory: "256Mi"
-            cpu: "100m"
-          limits:
-            memory: "2Gi"
-            cpu: "1"
+            requests:
+              memory: "3Gi"
+              cpu: "400m"
+            limits:
+              memory: "6Gi"
+              cpu: "2"
         {{- else }}
           requests:
             memory: "60Mi"
