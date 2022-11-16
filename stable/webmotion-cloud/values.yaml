@@ -7,7 +7,6 @@ global:
   environment: "local"
 
   deploymentName: "thedeploymentname"
-  target: webmotion
   host: app.webmotion.cloud
   rootDomain: webmotion.cloud
 
