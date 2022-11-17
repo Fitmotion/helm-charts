@@ -7,8 +7,10 @@ global:
   environment: "local"
 
   deploymentName: "thedeploymentname"
+  namespace: "thenamespace"
   host: app.webmotion.cloud
   rootDomain: webmotion.cloud
+  target: webmotion
 
   cert:
     issuer: letsencrypt-prod

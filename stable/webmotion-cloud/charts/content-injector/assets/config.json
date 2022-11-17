@@ -11,21 +11,15 @@
   "templatesRootPath": "/templates",
   "imagesRootPath": "/images",
   "k8s": {
-    {{- if eq .Values.global.environment "prod" }}
-    "namespace": "prod-fitmotion",
-    {{- else }}
-    "namespace": "dev-fitmotion",
-    {{- end }}
-
+    "namespace": "{{.Values.global.namespace}}",
     "configPath": "/tmp/webmotion/keys/kube_config",
 
     {{- if eq .Values.global.environment "prod" }}
-    "internalDomainSuffix": "on.webmotion.cloud",
-    "internalWildcardSecret": "webmotion-on-wildcard"
+    "internalDomainSuffix": "on.{{.Values.global.rootDomain}}",
     {{- else }}
-    "internalDomainSuffix": "on.dev.webmotion.cloud",
-    "internalWildcardSecret": "webmotion-dev-wildcard"
+    "internalDomainSuffix": "on.{{.Values.global.environment}}.{{.Values.global.rootDomain}}",
     {{- end }}
+    "internalWildcardSecret": "{{.Values.global.target}}-wildcard"
   },
   "fileShare": {
     "claimName": "cephfs-pvc"
@@ -33,16 +27,16 @@
   {{- if eq .Values.global.environment "prod" }}
   "fileServerBaseAdress": "http://global-file-server",
   {{- else if eq .Values.global.environment "qa" }}
-  "fileServerBaseAdress": "https://qa.webmotion.cloud",
+  "fileServerBaseAdress": "https://qa.{{.Values.global.rootDomain}}",
   {{- else }}
-  "fileServerBaseAdress": "https://{{.Values.global.deploymentName}}.dev.webmotion.cloud",
+  "fileServerBaseAdress": "https://{{.Values.global.deploymentName}}.dev.{{.Values.global.rootDomain}}",
   {{- end }}
 
   {{- if eq .Values.global.environment "prod" }}
-  "contactsJsUrl": "https://app.webmotion.cloud/lms/exposed/contact/create"
+  "contactsJsUrl": "https://app.{{.Values.global.rootDomain}}/lms/exposed/contact/create"
   {{- else if eq .Values.global.environment "qa" }}
-  "contactsJsUrl": "https://qa.webmotion.cloud/lms/exposed/contact/create"
+  "contactsJsUrl": "https://qa.{{.Values.global.rootDomain}}/lms/exposed/contact/create"
   {{- else }}
-  "contactsJsUrl": "https://{{.Values.global.deploymentName}}.dev.webmotion.cloud/lms/exposed/contact/create"
+  "contactsJsUrl": "https://{{.Values.global.deploymentName}}.dev.{{.Values.global.rootDomain}}/lms/exposed/contact/create"
   {{- end }}
 }
