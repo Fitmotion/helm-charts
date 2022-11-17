@@ -2,11 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/permanent-redirect: https://{{ $.Values.global.host }}/#$2?$args
   name: oauth-redirect-{{ $.Values.global.deploymentName }}
 spec:
+  ingressClassName: nginx
   rules:
   - host: {{ $.Values.global.host }}
     http:
