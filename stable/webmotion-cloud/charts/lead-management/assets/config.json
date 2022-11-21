@@ -18,6 +18,11 @@
     "email": "{{.Values.global.emailSecrets.email}}",
     "password": "{{.Values.global.emailSecrets.password}}"
   },
+  "smtpConfigs": {
+    "host": "smtp.strato.de",
+    "port": 587,
+    "secure": false
+  },
   "googleCalendar": {
     "clientId": "788802996428-crqo7r0r54punn3ousgqop6ge9c23c9e",
     "clientKey": "ffBSlxTR75wz4SosAefjzag3",

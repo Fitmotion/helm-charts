@@ -19,6 +19,11 @@
     "email": "{{.Values.global.emailSecrets.email}}",
     "password": "{{.Values.global.emailSecrets.password}}"
   },
+  "smtpConfigs": {
+    "host": "smtp.strato.de",
+    "port": 587,
+    "secure": false
+  },
   "websiteManager": {
     "url": "http://wcms-{{.Values.global.deploymentName}}:3002"
   },
