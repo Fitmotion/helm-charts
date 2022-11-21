@@ -45,9 +45,17 @@ global:
     appSecret: ""
     redirectUrlPath: "redirect/facebook-login-redirect"
 
-  emailSecrets:
-    email: support@webmotion.cloud
+  emailDefaults:
+    from:
+      name: "Webmotion"
+      address: support@webmotion.cloud
+
+  smtpConfigs:
+    host: "smtp-relay.sendinblue.com"
+    port: 587
+    username: "info@jaamotion.de"
     password: ""
+    secure: false
 
   activeCampaignSecrets:
     apiKey: ""

@@ -15,14 +15,18 @@
     }
   },
   "baseDomain": "{{.Values.global.host}}",
-  "emailSecrets": {
-    "email": "{{.Values.global.emailSecrets.email}}",
-    "password": "{{.Values.global.emailSecrets.password}}"
+  "emailDefaults": {
+    "from": {
+      "name": "{{.Values.global.emailDefaults.from.name}}",
+      "address": "{{.Values.global.emailDefaults.from.address}}"
+    }
   },
   "smtpConfigs": {
-    "host": "smtp.strato.de",
-    "port": 587,
-    "secure": false
+    "host": "{{.Values.global.smtpConfigs.host}}",
+    "port": {{.Values.global.smtpConfigs.port}},
+    "username": "{{.Values.global.smtpConfigs.username}}",
+    "password": "{{.Values.global.smtpConfigs.password}}",
+    "secure": {{.Values.global.smtpConfigs.secure}}
   },
   "websiteManager": {
     "url": "http://wcms-{{.Values.global.deploymentName}}:3002"
