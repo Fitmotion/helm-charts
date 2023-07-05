@@ -5,6 +5,7 @@ on:
       - master
     paths:
       - "stable/**"
+  workflow_dispatch:
   release:
     types: [published, created]
 
