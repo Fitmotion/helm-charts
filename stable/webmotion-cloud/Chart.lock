@@ -1,0 +1,33 @@
+dependencies:
+- name: gallery-management
+  repository: ""
+  version: 0.1.0
+- name: identity-provider
+  repository: ""
+  version: 0.1.0
+- name: ingress
+  repository: ""
+  version: 0.1.0
+- name: lead-management
+  repository: ""
+  version: 0.1.0
+- name: client
+  repository: ""
+  version: 0.1.0
+- name: content-injector
+  repository: ""
+  version: 0.1.0
+- name: marketing-management
+  repository: ""
+  version: 0.1.0
+- name: payment-management
+  repository: ""
+  version: 0.1.0
+- name: website-content-management
+  repository: ""
+  version: 0.1.0
+- name: ads-management
+  repository: ""
+  version: 0.1.0
+digest: sha256:5b6026772097fbba9accae507589d08ebe8392cd1ccaf1e3e8a809230e7fa4f3
+generated: "2023-07-05T11:12:15.052568+02:00"
