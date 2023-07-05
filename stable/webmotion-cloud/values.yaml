@@ -51,7 +51,7 @@ global:
       address: support@webmotion.cloud
 
   smtpConfigs:
-    host: "smtp-relay.sendinblue.com"
+    host: "smtp-relay.brevo.com"
     port: 587
     username: "info@jaamotion.de"
     password: ""
